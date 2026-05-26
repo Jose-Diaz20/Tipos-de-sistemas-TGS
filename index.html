@@ -1245,7 +1245,7 @@ function showFinal(){
   const pct=Math.round((qs/QS.length)*100);
   const sc=document.getElementById('qfs');sc.textContent=`${qs}/${QS.length}`;
   sc.className=pct>=80?'qfscore great':pct>=50?'qfscore ok':'qfscore bad';
-  const msgs=[[80,'🏆 ¡Excelente!','Tienes dominio sólido del tema. Estás muy bien preparado para la sustentación.'],[50,'👍 Buen avance','Entiendes los conceptos básicos. Repasa las secciones de teoría y vuelve a intentarlo.'],[0,'📚 Sigue practicando','No te desanimes. Regresa a la Teoría, lee con calma y vuelve a intentar el quiz.']];
+  const msgs=[[80,'🏆 ¡Excelente!','Tienes dominio sólido del tema.'],[50,'👍 Buen avance','Entiendes los conceptos básicos. Repasa las secciones de teoría y vuelve a intentarlo.'],[0,'📚 Sigue practicando','No te desanimes. Regresa a la Teoría, lee con calma y vuelve a intentar el quiz.']];
   const [,lbl,msg]=msgs.find(([t])=>pct>=t);
   document.getElementById('qfl').textContent=lbl;document.getElementById('qfm').textContent=msg;
 }
