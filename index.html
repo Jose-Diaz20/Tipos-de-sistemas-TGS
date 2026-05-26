@@ -905,6 +905,7 @@ tr:hover td{background:rgba(255,255,255,.03);}
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
 // ── CONFIG ──
 const SLIDES = [
   {id:'s1', label:'Portada', nav:'1'},
@@ -1140,9 +1141,8 @@ function checkDrag(){
   } else {
     const wrong=tot-ok;
     r.className='gresult show fail';
-    r.innerHTML=`<strong>${ok} de ${tot} correctas.</strong> Los elementos marcados en rojo tienen la categoría correcta indicada debajo. Corrígelos y vuelve a verificar, o usa ↺ Reiniciar para empezar de nuevo.`;
+    r.innerHTML='<strong>'+ok+' de '+tot+' correctas.</strong> Los elementos marcados en rojo tienen la categoria correcta indicada debajo. Corrigelos y vuelve a verificar, o usa el boton Reiniciar para empezar de nuevo.';
   }
-}
 }
 function resetDrag(){
   document.querySelectorAll('.ditem').forEach(i=>i.style.display='');
@@ -1251,6 +1251,19 @@ function showFinal(){
 }
 function restartQ(){qi=0;qs=0;loadQ();}
 loadQ();
+
+// expose nav functions globally so onclick attributes work
+window.go = go;
+window.checkDrag = checkDrag;
+window.resetDrag = resetDrag;
+window.removeDrop = removeDrop;
+window.initMem = initMem;
+window.answerEj = answerEj;
+window.resetEj = resetEj;
+window.nextQ = nextQ;
+window.restartQ = restartQ;
+window.goTo = goTo;
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
