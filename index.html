@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVA · Tipos de Sistemas · TGS · Briceño Díaz José Antonio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0f1e;
+  --blue-deep:#0d1f4e;
+  --blue-mid:#1a3a6e;
+  --teal:#0e9b8a;
+  --teal-light:#12c4ae;
+  --orange:#f47b20;
+  --orange-light:#ffa451;
+  --gold:#f5c842;
+  --white:#fff;
+  --glass:rgba(255,255,255,.07);
+  --glass-b:rgba(255,255,255,.12);
+  --r:16px;
+  --rs:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px;}
+
+/* ── TOP NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:60px;
+  background:rgba(10,15,30,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--glass-b);
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--teal-light);}
+.nav-logo span{color:var(--orange);}
+.nav-steps{display:flex;gap:4px;}
+.nav-step{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--glass-b);
+  background:var(--glass);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;
+  cursor:pointer;transition:all .2s;color:rgba(255,255,255,.5);
+}
+.nav-step:hover{background:rgba(14,155,138,.2);color:var(--teal-light);}
+.nav-step.active{background:var(--teal);color:var(--white);border-color:var(--teal);}
+.nav-info{font-size:.78rem;color:rgba(255,255,255,.4);}
+
+/* ── MAIN WRAPPER ── */
+#ova-wrapper{padding-top:60px;min-height:100vh;}
+
+/* ── SLIDES ── */
+.slide{
+  display:none;
+  min-height:calc(100vh - 60px);
+  padding:48px 32px 100px;
+  animation:fadeSlide .4s ease;
+}
+.slide.active{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.slide-inner{max-width:1000px;margin:0 auto;}
+
+/* ── BOTTOM NAV BAR ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 32px;
+  background:rgba(10,15,30,.95);
+  border-top:1px solid var(--glass-b);
+  backdrop-filter:blur(16px);
+}
+.nav-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;
+  font-weight:600;font-size:.88rem;
+  cursor:pointer;border:none;
+  transition:all .2s;
+}
+.btn-prev{background:var(--glass);border:1px solid var(--glass-b);color:rgba(255,255,255,.7);}
+.btn-prev:hover{background:rgba(255,255,255,.12);color:var(--white);}
+.btn-prev:disabled{opacity:.3;cursor:default;}
+.btn-next{background:linear-gradient(135deg,var(--teal),var(--blue-mid));color:var(--white);box-shadow:0 6px 20px rgba(14,155,138,.3);}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(14,155,138,.4);}
+.btn-next:disabled{opacity:.4;cursor:default;transform:none;}
+.slide-label{font-size:.8rem;color:rgba(255,255,255,.4);text-align:center;}
+
+/* ── COMMON COMPONENTS ── */
+.badge{
+  display:inline-block;font-size:.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:var(--teal-light);
+  background:rgba(14,155,138,.12);
+  border:1px solid rgba(14,155,138,.25);
+  padding:4px 12px;border-radius:50px;
+  margin-bottom:14px;
+}
+h1.slide-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;line-height:1.08;
+  letter-spacing:-.03em;
+  margin-bottom:16px;
+}
+h1.slide-title .acc{
+  background:linear-gradient(135deg,var(--teal-light),var(--orange-light));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+h2.sec{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:800;letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+h2.sec .t{color:var(--teal-light);}
+.lead{font-size:.97rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:28px;max-width:700px;}
+.cita{
+  background:rgba(14,155,138,.08);
+  border-left:3px solid var(--teal);
+  padding:16px 20px;border-radius:0 var(--rs) var(--rs) 0;
+  font-size:.9rem;font-style:italic;
+  color:rgba(255,255,255,.8);
+  margin:20px 0;
+  line-height:1.65;
+}
+.cita cite{display:block;margin-top:8px;font-style:normal;font-size:.78rem;color:var(--teal-light);}
+.ref-note{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:6px;}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:8px;}
+.card{
+  background:var(--glass);border:1px solid var(--glass-b);
+  border-radius:var(--r);padding:24px 20px;
+  position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.25);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0;}
+.c1::before{background:linear-gradient(90deg,var(--teal),var(--teal-light));}
+.c2::before{background:linear-gradient(90deg,#6b7cb0,#98a8d0);}
+.c3::before{background:linear-gradient(90deg,var(--orange),var(--orange-light));}
+.c4::before{background:linear-gradient(90deg,var(--gold),#ffe08a);}
+.c5::before{background:linear-gradient(90deg,#9b3d7e,#d45faa);}
+.c6::before{background:linear-gradient(90deg,#3da05a,#5fd97a);}
+.c7::before{background:linear-gradient(90deg,#c13030,#e85555);}
+.c8::before{background:linear-gradient(90deg,#3470d4,#5c94f0);}
+.c9::before{background:linear-gradient(90deg,#4e9e8c,#7fd4c6);}
+.c10::before{background:linear-gradient(90deg,#7e3dd4,#b07af5);}
+.card-icon{font-size:2rem;margin-bottom:10px;display:block;}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:8px;}
+.card-def{font-size:.85rem;color:rgba(255,255,255,.62);line-height:1.6;margin-bottom:12px;}
+.card-eg{font-size:.78rem;padding:9px 12px;background:rgba(255,255,255,.05);border-radius:var(--rs);border-left:2px solid;color:rgba(255,255,255,.7);line-height:1.5;}
+.c1 .card-eg{border-color:var(--teal);}
+.c2 .card-eg{border-color:#6b7cb0;}
+.c3 .card-eg{border-color:var(--orange);}
+.c4 .card-eg{border-color:var(--gold);}
+.c5 .card-eg{border-color:#9b3d7e;}
+.c6 .card-eg{border-color:#3da05a;}
+.c7 .card-eg{border-color:#c13030;}
+.c8 .card-eg{border-color:#3470d4;}
+.c9 .card-eg{border-color:#4e9e8c;}
+.c10 .card-eg{border-color:#7e3dd4;}
+.card-eg strong{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;opacity:.65;}
+
+/* table */
+.tbl-wrap{overflow-x:auto;margin:20px 0;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{background:rgba(14,155,138,.15);padding:10px 14px;text-align:left;font-weight:600;color:var(--teal-light);border-bottom:1px solid var(--glass-b);}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.72);vertical-align:top;line-height:1.5;}
+tr:hover td{background:rgba(255,255,255,.03);}
+
+/* two col */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px;}
+@media(max-width:640px){.two-col{grid-template-columns:1fr;}}
+
+/* highlight box */
+.hbox{
+  background:rgba(14,155,138,.07);
+  border:1px solid rgba(14,155,138,.2);
+  border-radius:var(--r);padding:20px 24px;
+  margin:20px 0;
+}
+.hbox-title{font-family:'Syne',sans-serif;font-weight:700;color:var(--teal-light);margin-bottom:10px;}
+.hbox ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.hbox li{font-size:.88rem;color:rgba(255,255,255,.7);padding-left:18px;position:relative;line-height:1.5;}
+.hbox li::before{content:'→';position:absolute;left:0;color:var(--teal);}
+
+/* ── SLIDE 1: HERO ── */
+.hero-layout{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center;}
+@media(max-width:760px){.hero-layout{grid-template-columns:1fr;}}
+.orbit{width:260px;height:260px;position:relative;margin:0 auto;animation:spin 30s linear infinite;}
+.orbit-ring{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(14,155,138,.2);}
+.orbit-ring:nth-child(2){inset:40px;border-color:rgba(244,123,32,.18);animation:spinr 20s linear infinite;}
+.orbit-ring:nth-child(3){inset:70px;border-color:rgba(245,200,66,.15);}
+.odot{position:absolute;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;text-align:center;line-height:1.2;}
+.odot:nth-child(4){background:rgba(14,155,138,.8);top:-18px;left:50%;transform:translateX(-50%);}
+.odot:nth-child(5){background:rgba(244,123,32,.8);bottom:-18px;right:28px;}
+.odot:nth-child(6){background:rgba(26,58,110,.9);border:1px solid var(--teal);left:-18px;top:50%;transform:translateY(-50%);}
+.odot:nth-child(7){background:rgba(245,200,66,.8);color:var(--ink);right:-18px;top:50%;transform:translateY(-50%);}
+.ocenter{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;animation:spinr 30s linear infinite;}
+.ocenter-inner{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue-mid));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;text-align:center;line-height:1.3;box-shadow:0 0 50px rgba(14,155,138,.35);}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes spinr{to{transform:rotate(-360deg);}}
+
+.obj-list{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
+.obj{display:flex;align-items:flex-start;gap:12px;background:var(--glass);border:1px solid var(--glass-b);padding:12px 16px;border-radius:var(--rs);}
+.obj-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--teal-light);line-height:1;min-width:24px;}
+.obj-t{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.5;}
+
+/* ── GAME 1: DRAG ── */
+.drag-bank{display:flex;flex-wrap:wrap;gap:10px;padding:16px;border:2px dashed rgba(255,255,255,.15);border-radius:var(--rs);min-height:70px;margin-bottom:24px;}
+.ditem{padding:8px 16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:50px;font-size:.82rem;font-weight:500;cursor:grab;transition:all .2s;user-select:none;}
+.ditem:hover{background:rgba(255,255,255,.16);transform:scale(1.04);}
+.ditem.dragging{opacity:.35;}
+.drop-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.drop-grid{grid-template-columns:1fr;}}
+.dzone{min-height:110px;border:2px dashed;border-radius:var(--rs);padding:14px;transition:background .2s;}
+.dz0{border-color:var(--teal);} .dz1{border-color:#6b7cb0;} .dz2{border-color:var(--orange);} .dz3{border-color:var(--gold);}
+.dzone.over{background:rgba(255,255,255,.05);}
+.dzone-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
+.dz0 .dzone-title{color:var(--teal-light);}
+.dz1 .dzone-title{color:#98a8d0;}
+.dz2 .dzone-title{color:var(--orange-light);}
+.dz3 .dzone-title{color:var(--gold);}
+.dropped-list{display:flex;flex-wrap:wrap;gap:6px;min-height:36px;}
+.dplaced{padding:5px 12px;border-radius:50px;font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:5px;}
+.dz0 .dplaced{background:rgba(14,155,138,.2);color:var(--teal-light);}
+.dz1 .dplaced{background:rgba(107,124,176,.2);color:#98a8d0;}
+.dz2 .dplaced{background:rgba(244,123,32,.2);color:var(--orange-light);}
+.dz3 .dplaced{background:rgba(245,200,66,.2);color:var(--gold);}
+.dplaced .rmv{cursor:pointer;opacity:.6;} .dplaced .rmv:hover{opacity:1;}
+.gbtn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;font-weight:600;font-size:.86rem;cursor:pointer;border:none;transition:all .2s;margin-top:20px;margin-right:8px;}
+.gbtn-go{background:linear-gradient(135deg,var(--teal),var(--blue-mid));color:var(--white);box-shadow:0 5px 18px rgba(14,155,138,.3);}
+.gbtn-go:hover{transform:translateY(-2px);}
+.gbtn-rst{background:var(--glass);border:1px solid var(--glass-b);color:rgba(255,255,255,.75);}
+.gbtn-rst:hover{background:rgba(255,255,255,.12);}
+.gresult{margin-top:16px;padding:14px 18px;border-radius:var(--rs);font-size:.88rem;font-weight:500;display:none;}
+.gresult.show{display:block;}
+.gresult.ok{background:rgba(14,155,138,.12);border:1px solid rgba(14,155,138,.25);color:var(--teal-light);}
+.gresult.fail{background:rgba(220,50,50,.1);border:1px solid rgba(220,50,50,.22);color:#ff8a8a;}
+
+/* ── GAME 2: MEMORY ── */
+.mem-bar{display:flex;gap:20px;margin-bottom:20px;background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--rs);padding:12px 18px;}
+.mem-stat{text-align:center;}
+.mem-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.45);margin-bottom:3px;}
+.mem-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;color:var(--teal-light);}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto 20px;}
+@media(max-width:520px){.mgrid{grid-template-columns:repeat(3,1fr);}}
+.mcard{aspect-ratio:3/4;perspective:500px;cursor:pointer;}
+.minner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .35s;}
+.mcard.flipped .minner,.mcard.matched .minner{transform:rotateY(180deg);}
+.mcard.matched .mback{border-color:var(--teal);box-shadow:0 0 16px rgba(14,155,138,.25);}
+.mfront,.mback{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;}
+.mfront{background:linear-gradient(135deg,var(--blue-mid),var(--blue-deep));border:1px solid rgba(255,255,255,.1);font-size:1.5rem;}
+.mback{background:var(--glass);border:1px solid var(--glass-b);transform:rotateY(180deg);font-size:.72rem;font-weight:500;line-height:1.35;color:var(--white);}
+.mback .me{font-size:1.2rem;display:block;margin-bottom:5px;}
+
+/* ── QUIZ ── */
+.quiz-wrap{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r);padding:32px;max-width:720px;margin:0 auto;}
+.qprog-row{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.qpbar{flex:1;height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;}
+.qpfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:3px;transition:width .4s;}
+.qctr{font-size:.78rem;color:rgba(255,255,255,.45);white-space:nowrap;}
+.qquestion{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.4;margin-bottom:22px;}
+.qopts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.qopt{padding:12px 18px;border-radius:var(--rs);border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);font-size:.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;text-align:left;color:var(--white);}
+.qopt:hover:not(.disabled){border-color:rgba(14,155,138,.45);background:rgba(14,155,138,.07);}
+.qletter{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.76rem;flex-shrink:0;transition:all .2s;}
+.qopt.correct{background:rgba(14,155,138,.18);border-color:var(--teal);color:var(--teal-light);}
+.qopt.correct .qletter{background:var(--teal);border-color:var(--teal);color:#fff;}
+.qopt.wrong{background:rgba(220,50,50,.1);border-color:rgba(220,50,50,.35);color:#ff8a8a;}
+.qopt.wrong .qletter{background:rgba(220,50,50,.35);border-color:rgba(220,50,50,.5);color:#fff;}
+.qopt.disabled{cursor:default;}
+.qfb{font-size:.85rem;padding:11px 14px;border-radius:var(--rs);margin-bottom:16px;display:none;line-height:1.5;}
+.qfb.show{display:block;}
+.qfb.ok{background:rgba(14,155,138,.1);border:1px solid rgba(14,155,138,.22);color:var(--teal-light);}
+.qfb.fail{background:rgba(220,50,50,.09);border:1px solid rgba(220,50,50,.18);color:#ff9090;}
+.qnav{display:flex;align-items:center;justify-content:space-between;}
+.qpts{font-size:.82rem;color:rgba(255,255,255,.45);}
+.qfinal{display:none;text-align:center;padding:16px 0;}
+.qfinal.show{display:block;}
+.qfscore{font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;line-height:1;margin-bottom:6px;}
+.qfscore.great{color:var(--teal-light);}
+.qfscore.ok{color:var(--gold);}
+.qfscore.bad{color:#ff8a8a;}
+.qflbl{font-size:1rem;color:rgba(255,255,255,.55);margin-bottom:18px;}
+.qfmsg{font-size:.87rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:22px;}
+
+/* ── VIDEOS ── */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px;}
+.vcard{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r);overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.25);}
+.vembed{width:100%;aspect-ratio:16/9;}
+.vembed iframe{width:100%;height:100%;border:none;}
+.vinfo{padding:14px 18px;}
+.vtitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:5px;}
+.vdesc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+/* ── CREDITS ── */
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:640px){.cred-grid{grid-template-columns:1fr;}}
+.ccard{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r);padding:24px;}
+.ccard-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--glass-b);}
+.citem{margin-bottom:14px;font-size:.84rem;color:rgba(255,255,255,.62);line-height:1.55;}
+.citem strong{color:var(--white);display:block;margin-bottom:2px;}
+.ref{margin-bottom:10px;font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55;padding-left:14px;position:relative;}
+.ref::before{content:'›';position:absolute;left:0;color:var(--teal);}
+
+/* app modern */
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:8px;}
+.acard{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--rs);padding:16px;transition:transform .2s;}
+.acard:hover{transform:translateY(-2px);}
+.acard-icon{font-size:1.6rem;margin-bottom:8px;}
+.acard-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px;}
+.acard-type{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-light);margin-bottom:6px;}
+.acard-desc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5;}
+
+/* formula box */
+.formula{
+  font-family:monospace;font-size:1rem;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--glass-b);
+  border-radius:var(--rs);
+  padding:14px 18px;margin:16px 0;
+  color:var(--teal-light);
+  display:inline-block;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav>
+  <div class="nav-logo">TGS <span>·</span> OVA</div>
+  <div class="nav-steps" id="nav-steps"></div>
+  <div class="nav-info" id="nav-info">Cargando...</div>
+</nav>
+
+<!-- MAIN -->
+<div id="ova-wrapper">
+
+<!-- ══ SLIDE 1: PORTADA ══ -->
+<div class="slide active" id="s1">
+<div class="slide-inner">
+  <div class="hero-layout">
+    <div>
+      <div class="badge">Teoría General de Sistemas · TGS · UniSimón</div>
+      <h1 class="slide-title">Tipos de<br><span class="acc">Sistemas</span></h1>
+      <p class="lead">
+        Explora la clasificación de los sistemas según su comportamiento, origen e interacción con el entorno. Aprende a identificar sistemas dinámicos, estáticos, adaptativos, abiertos, cerrados y más — todo con ejemplos del mundo real y tecnología actual.
+      </p>
+      <div class="cita">
+        "Un sistema es un complejo de elementos que interactúan."
+        <cite>— Ludwig von Bertalanffy (1945). Fundador de la Teoría General de Sistemas.</cite>
+      </div>
+      <div class="obj-list">
+        <div class="obj"><span class="obj-n">01</span><span class="obj-t">Identificar y diferenciar los tipos de sistemas según su comportamiento, origen y relación con el entorno.</span></div>
+        <div class="obj"><span class="obj-n">02</span><span class="obj-t">Aplicar la clasificación de sistemas a ejemplos del mundo real: tecnología, biología, sociedad.</span></div>
+        <div class="obj"><span class="obj-n">03</span><span class="obj-t">Comprender que un mismo sistema puede pertenecer a múltiples categorías simultáneamente.</span></div>
+        <div class="obj"><span class="obj-n">04</span><span class="obj-t">Demostrar dominio del tema a través de actividades interactivas y una evaluación con puntaje automático.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="odot">DIN</div>
+        <div class="odot">EST</div>
+        <div class="odot">ABI</div>
+        <div class="odot">ADA</div>
+        <div class="ocenter"><div class="ocenter-inner">TIPOS DE<br>SISTEMAS</div></div>
+      </div>
+      <p style="text-align:center;margin-top:20px;font-size:.78rem;color:rgba(255,255,255,.35);">Usa los botones ↓ para navegar entre secciones</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ SLIDE 2: QUÉ ES UN SISTEMA ══ -->
+<div class="slide" id="s2">
+<div class="slide-inner">
+  <div class="badge">Contexto previo</div>
+  <h2 class="sec">¿Qué es un <span class="t">Sistema</span>?</h2>
+  <p class="lead">Antes de clasificar, es fundamental comprender qué es un sistema. La Teoría General de Sistemas (TGS) fue desarrollada por el biólogo Ludwig von Bertalanffy a mediados del siglo XX, buscando unificar la ciencia con principios aplicables a todo tipo de sistemas.</p>
+
+  <div class="cita">
+    "Un sistema en la Teoría General de Sistemas es una entidad claramente definida compuesta por partes que presentan interrelaciones e interdependencias, cuya suma es mayor que la suma de sus partes."
+    <cite>— Raffino, Equipo editorial Etecé (2026). Enciclopedia Concepto. concepto.de/teoria-de-sistemas/</cite>
+  </div>
+
+  <div class="two-col" style="margin-top:24px;">
+    <div>
+      <div class="hbox">
+        <div class="hbox-title">Componentes esenciales de un sistema</div>
+        <ul>
+          <li><strong>Entradas (inputs):</strong> información, energía o materia que ingresa desde el exterior</li>
+          <li><strong>Transformadores:</strong> mecanismos que convierten entradas en salidas</li>
+          <li><strong>Salidas (outputs):</strong> resultado del procesamiento del sistema</li>
+          <li><strong>Retroalimentación:</strong> cuando las salidas se convierten en nuevas entradas</li>
+          <li><strong>Límite:</strong> frontera que diferencia el sistema de su entorno</li>
+          <li><strong>Entorno:</strong> todo lo que existe fuera del sistema</li>
+        </ul>
+      </div>
+      <div class="ref-note">Fuente: Raffino (2026). concepto.de/teoria-de-sistemas/</div>
+    </div>
+    <div>
+      <div class="hbox" style="border-color:rgba(244,123,32,.2);background:rgba(244,123,32,.06);">
+        <div class="hbox-title" style="color:var(--orange-light);">Principios clave de Bertalanffy</div>
+        <ul>
+          <li>Los sistemas existen dentro de otros sistemas</li>
+          <li>Los sistemas abiertos y cerrados se comportan de manera diferente</li>
+          <li>Las funciones de un sistema dependen de su estructura</li>
+          <li><strong>"El todo es más que la suma de sus partes"</strong> (sinergia)</li>
+        </ul>
+      </div>
+      <div class="cita" style="margin-top:16px;font-size:.82rem;">
+        "Un conjunto de elementos en estado de interacción"
+        <cite>— Bertalanffy, L. von (1974). Robots, hombres y mentes. Guadarrama, Madrid. p. 96</cite>
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:24px;">
+    <table>
+      <tr><th>Categoría de clasificación</th><th>Tipos incluidos</th><th>Criterio diferenciador</th></tr>
+      <tr><td>Por intercambio con el entorno</td><td>Abiertos, cerrados, semiabiertos, aislados</td><td>Intercambio de materia/energía</td></tr>
+      <tr><td>Por comportamiento temporal</td><td>Estáticos, dinámicos, adaptativos</td><td>Cambio con el tiempo</td></tr>
+      <tr><td>Por naturaleza</td><td>Naturales, artificiales, sociales</td><td>Origen del sistema</td></tr>
+      <tr><td>Por predictibilidad</td><td>Determinísticos, probabilísticos</td><td>Presencia de incertidumbre</td></tr>
+      <tr><td>Por complejidad</td><td>Simples, complejos</td><td>Número de elementos y relaciones</td></tr>
+      <tr><td>Por tipo de variables</td><td>Discretos, continuos</td><td>Valores que pueden tomar las variables</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══ SLIDE 3: DINÁMICOS Y ESTÁTICOS ══ -->
+<div class="slide" id="s3">
+<div class="slide-inner">
+  <div class="badge">Tipos por comportamiento temporal</div>
+  <h2 class="sec">Sistemas <span class="t">Dinámicos, Estáticos y Adaptativos</span></h2>
+  <p class="lead">La clasificación más fundamental de los sistemas responde a la pregunta: ¿cambia el sistema con el tiempo? Esta distinción tiene enorme relevancia en ingeniería, biología y tecnología.</p>
+
+  <div class="cards">
+    <div class="card c1">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Sistema Dinámico</div>
+      <div class="card-def">Cambia constantemente a lo largo del tiempo. Sus variables y estado evolucionan en respuesta a estímulos internos y externos. Ofrecen mayor flexibilidad y capacidad de adaptación.</div>
+      <div class="card-eg"><strong>Fórmula conceptual</strong>Estado = f(t) — evoluciona con el tiempo</div>
+      <div class="card-eg" style="margin-top:8px;"><strong>Ejemplos</strong>El clima, mercado bursátil, organismos vivos, maquinaria en fábricas, economías nacionales</div>
+    </div>
+    <div class="card c2">
+      <span class="card-icon">🗿</span>
+      <div class="card-title">Sistema Estático</div>
+      <div class="card-def">Permanece en un estado constante o inmutable; no cambia con el tiempo durante el período de análisis. Son rígidos y no permiten adaptaciones espontáneas.</div>
+      <div class="card-eg"><strong>Fórmula conceptual</strong>Estado = constante (no varía con el tiempo)</div>
+      <div class="card-eg" style="margin-top:8px;"><strong>Ejemplos</strong>Estructuras de edificios, sistemas axiomáticos matemáticos, leyes físicas, una escultura</div>
+    </div>
+    <div class="card c3">
+      <span class="card-icon">🔄</span>
+      <div class="card-title">Sistema Adaptativo</div>
+      <div class="card-def">Capaz de ajustarse y aprender de las condiciones cambiantes. Modifica su comportamiento en respuesta a cambios del entorno, usando retroalimentación como mecanismo central.</div>
+      <div class="card-eg"><strong>Características clave</strong>Aprendizaje, autoajuste, autoorganización, flexibilidad ante cambios</div>
+      <div class="card-eg" style="margin-top:8px;"><strong>Ejemplos</strong>Sistema inmunológico, algoritmos de Machine Learning, organizaciones ágiles, ecosistemas</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:28px;">
+    <table>
+      <tr><th>Característica</th><th>Estático</th><th>Dinámico</th><th>Adaptativo</th></tr>
+      <tr><td>Cambio en el tiempo</td><td>No cambia</td><td>Cambia constantemente</td><td>Cambia y aprende</td></tr>
+      <tr><td>Flexibilidad</td><td>Rígido</td><td>Flexible ante condiciones</td><td>Alta — se autoajusta</td></tr>
+      <tr><td>Retroalimentación</td><td>No usa</td><td>Puede usarla</td><td>Fundamental para su funcionamiento</td></tr>
+      <tr><td>Predictibilidad</td><td>Total</td><td>Parcial</td><td>Variable — depende del entorno</td></tr>
+      <tr><td>Ejemplo tecnológico</td><td>Circuito resistivo en reposo</td><td>GPS recalculando rutas</td><td>Netflix recomendando contenido</td></tr>
+    </table>
+  </div>
+  <div class="ref-note">Fuente: Hernandez (2024) via Studocu. studocu.com/co — Comparativa de sistemas dinámicos y estáticos · Wikipedia (2004). es.wikipedia.org/wiki/Sistema_dinámico</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 4: ABIERTOS / CERRADOS / SEMIABIERTOS / AISLADOS ══ -->
+<div class="slide" id="s4">
+<div class="slide-inner">
+  <div class="badge">Tipos por intercambio con el entorno</div>
+  <h2 class="sec">Sistemas Abiertos, Cerrados, <span class="t">Semiabiertos y Aislados</span></h2>
+  <p class="lead">Esta clasificación responde a: ¿intercambia el sistema materia, energía o información con su entorno? Es una de las clasificaciones más importantes en TGS.</p>
+
+  <div class="cards">
+    <div class="card c4">
+      <span class="card-icon">🌐</span>
+      <div class="card-title">Sistema Abierto</div>
+      <div class="card-def">Intercambia libremente materia y energía con su entorno. En constante interacción con el ambiente externo. Puede adaptarse y evolucionar. Son los más comunes en la naturaleza y la sociedad.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Organismos vivos, empresas, ecosistemas, ciudades, olla de agua hirviendo, plantas</div>
+    </div>
+    <div class="card c5">
+      <span class="card-icon">🔒</span>
+      <div class="card-title">Sistema Cerrado</div>
+      <div class="card-def">Intercambia solo energía (pero no materia) con el entorno. Concepto teórico muy usado en física y termodinámica para simplificar análisis. Limitada capacidad de adaptación.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Bombillo (entra electricidad, sale luz; no entra/sale materia), recipiente sellado con gas, botella termosellada</div>
+    </div>
+    <div class="card c6">
+      <span class="card-icon">🔬</span>
+      <div class="card-title">Sistema Semiabierto</div>
+      <div class="card-def">Intercambia energía e información, pero el intercambio de materia es limitado o controlado. Intercambio selectivo a través de una membrana semipermeable. Posición intermedia entre abierto y cerrado.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Células biológicas (membrana semipermeable), olla a presión, edificios con climatización controlada, bosques con intercambio limitado</div>
+    </div>
+    <div class="card c7">
+      <span class="card-icon">🚫</span>
+      <div class="card-title">Sistema Aislado</div>
+      <div class="card-def">No produce intercambio ni de materia ni de energía con el entorno. Sistema teórico/ideal: en la práctica, ningún sistema está completamente aislado. Solo el universo podría considerarse aislado.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Termo ideal (botella térmica perfectamente aislada), universo como conjunto, recipiente Dewar, cámara de vacío con aislamiento total</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:20px;">
+    <table>
+      <tr><th>Aspecto</th><th>Abierto</th><th>Semiabierto</th><th>Cerrado</th><th>Aislado</th></tr>
+      <tr><td>Materia</td><td>Intercambio libre</td><td>Limitado/controlado</td><td>No intercambia</td><td>No intercambia</td></tr>
+      <tr><td>Energía</td><td>Libre</td><td>Libre</td><td>Libre</td><td>No intercambia</td></tr>
+      <tr><td>Información</td><td>Libre</td><td>Libre</td><td>No intercambia</td><td>No intercambia</td></tr>
+      <tr><td>Barrera</td><td>Sin barreras</td><td>Membrana semipermeable</td><td>Sellado a materia</td><td>Impermeable total</td></tr>
+      <tr><td>Realidad práctica</td><td>Muy común</td><td>Común en biología</td><td>Laboratorios</td><td>Sistema ideal/teórico</td></tr>
+    </table>
+  </div>
+  <div class="ref-note">Fuentes: Concepto (2026). concepto.de/diferencia-entre-sistema-abierto-cerrado-y-aislado · Studocu (2024). studocu.com/es-ar — Tipos de Sistemas · Diferenciador (2019). diferenciador.com · Ejemplos.co (2025)</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 5: NATURALES / ARTIFICIALES / SOCIALES ══ -->
+<div class="slide" id="s5">
+<div class="slide-inner">
+  <div class="badge">Tipos por naturaleza y origen</div>
+  <h2 class="sec">Sistemas Naturales, Artificiales <span class="t">y Sociales</span></h2>
+  <p class="lead">Esta clasificación se basa en el origen del sistema: ¿fue creado por la naturaleza, por el ser humano, o emerge de relaciones entre personas?</p>
+
+  <div class="cards">
+    <div class="card c1">
+      <span class="card-icon">🌿</span>
+      <div class="card-title">Sistema Natural</div>
+      <div class="card-def">Sistemas que existen en la naturaleza sin intervención humana. Generalmente son abiertos, dinámicos y complejos.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Cuerpo humano, sistema digestivo, células, ecosistemas (bosque, océano), sistema solar, fotosíntesis, huracanes, clima</div>
+    </div>
+    <div class="card c8">
+      <span class="card-icon">⚙️</span>
+      <div class="card-title">Sistema Artificial</div>
+      <div class="card-def">Sistemas creados por el ser humano para satisfacer necesidades específicas. Generalmente son determinísticos y tienen estructura fija.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Computadora, robot, avión, supermercado, cajero automático, internet, redes de trenes, maquinaria industrial</div>
+    </div>
+    <div class="card c9">
+      <span class="card-icon">👥</span>
+      <div class="card-title">Sistema Social</div>
+      <div class="card-def">Formados por personas, grupos u organizaciones que interactúan entre sí. Son sistemas abiertos, complejos, adaptativos y dinámicos. Tienen valores, normas y cultura propios.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Familia, universidad, empresa, gobierno, sistema de salud, partido político, medios de comunicación, comunidad religiosa</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:24px;">
+    <table>
+      <tr><th>Aspecto</th><th>Natural</th><th>Artificial</th><th>Social</th></tr>
+      <tr><td>Origen</td><td>La naturaleza</td><td>El ser humano</td><td>Relaciones humanas</td></tr>
+      <tr><td>Elementos</td><td>Físicos, biológicos</td><td>Máquinas, tecnología</td><td>Personas, grupos</td></tr>
+      <tr><td>Comportamiento</td><td>Det. o probabilístico</td><td>Generalmente determinístico</td><td>Probabilístico, cambiante</td></tr>
+      <tr><td>Valores/normas</td><td>Sin valores</td><td>Sin valores</td><td>Tienen valores y cultura</td></tr>
+      <tr><td>Adaptabilidad</td><td>Variable</td><td>Limitada</td><td>Alta</td></tr>
+    </table>
+  </div>
+  <div class="ref-note">Fuente: Studocu (2025). studocu.com/pe — Clasificación de los sistemas naturales, artificiales y sociales · cmapspublic.ihmc.us — Sistemas Naturales y Artificiales</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 6: DETERMINÍSTICOS / PROBABILÍSTICOS / SIMPLES / COMPLEJOS ══ -->
+<div class="slide" id="s6">
+<div class="slide-inner">
+  <div class="badge">Tipos por predictibilidad y complejidad</div>
+  <h2 class="sec">Simples, Complejos, Determinísticos <span class="t">y Probabilísticos</span></h2>
+  <p class="lead">Estas clasificaciones responden a dos preguntas clave: ¿cuántos elementos y relaciones tiene el sistema? ¿Y podemos predecir su comportamiento con certeza?</p>
+
+  <div class="cards">
+    <div class="card c6">
+      <span class="card-icon">🔗</span>
+      <div class="card-title">Sistema Simple</div>
+      <div class="card-def">Pocos elementos y relaciones entre ellos. Comportamiento fácil de predecir y analizar directamente.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Péndulo simple, circuito eléctrico básico R-C, palanca, función f(x)=x+1, juego de billar</div>
+    </div>
+    <div class="card c7">
+      <span class="card-icon">🧠</span>
+      <div class="card-title">Sistema Complejo</div>
+      <div class="card-def">Numerosos elementos con múltiples interrelaciones. Comportamiento emergente: el todo es más que la suma de sus partes. Difícil de predecir.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Cerebro humano, internet, clima global, bolsa de valores, redes sociales, ecosistemas</div>
+    </div>
+    <div class="card c1">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Sistema Determinístico</div>
+      <div class="card-def">Se conoce la salida exacta teniendo en cuenta las variables de entrada. Resultados iguales y predecibles para las mismas entradas. No hay azar.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Máquinas simples, sistemas mecánicos, ecuaciones físicas clásicas. Fórmula: Salida = f(Entrada)</div>
+    </div>
+    <div class="card c3">
+      <span class="card-icon">🎲</span>
+      <div class="card-title">Sistema Probabilístico</div>
+      <div class="card-def">Al menos una variable se toma al azar. Incluye incertidumbre. Resultados variables que dependen de probabilidades. Comportamiento dinámico.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Distribuciones estadísticas, sistemas biológicos, mercados financieros, clima (pronóstico). Fórmula: Salida = f(Entrada) + azar</div>
+    </div>
+    <div class="card c8">
+      <span class="card-icon">💡</span>
+      <div class="card-title">Sistema Discreto</div>
+      <div class="card-def">Variables que solo toman valores finitos y contables. Cambios ocurren en instantes específicos del tiempo.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Semáforo (rojo/amarillo/verde), lógica booleana (0/1), sistema de calificaciones universitario</div>
+    </div>
+    <div class="card c9">
+      <span class="card-icon">〰️</span>
+      <div class="card-title">Sistema Continuo</div>
+      <div class="card-def">Variables que pueden tomar cualquier valor dentro de un rango. Cambios ocurren de forma ininterrumpida en el tiempo.</div>
+      <div class="card-eg"><strong>Ejemplos</strong>Temperatura corporal, presión sanguínea, corriente alterna, velocidad de un auto, nivel de un río</div>
+    </div>
+  </div>
+  <div class="ref-note">Fuente: Scribd/Wikipedia (2025). Modelos determinísticos y probabilísticos · SENA ADSI. Clasificación de los Sistemas · Studocu. Cuadro comparativo dinámico vs estático</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 7: APLICACIONES MODERNAS ══ -->
+<div class="slide" id="s7">
+<div class="slide-inner">
+  <div class="badge">Aplicaciones actuales 2025–2026</div>
+  <h2 class="sec">Los Sistemas en la <span class="t">Tecnología Actual</span></h2>
+  <p class="lead">La teoría no está en los libros — está en las apps que usas todos los días. Estos son sistemas reales clasificados según los tipos que aprendiste, con su aplicación en la tecnología actual.</p>
+
+  <div class="app-grid">
+    <div class="acard">
+      <div class="acard-icon">🤖</div>
+      <div class="acard-name">Inteligencia Artificial</div>
+      <div class="acard-type">Adaptativo · Complejo</div>
+      <div class="acard-desc">AutoGPT, Claude, GPT-4 aprenden y se ajustan con cada interacción gracias al aprendizaje por refuerzo (RLHF).</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🎬</div>
+      <div class="acard-name">Netflix / Spotify</div>
+      <div class="acard-type">Adaptativo · Probabilístico</div>
+      <div class="acard-desc">Algoritmos que aprenden tus preferencias y predicen gustos. Recomendaciones personalizadas basadas en comportamiento.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🗺️</div>
+      <div class="acard-name">GPS / Waze</div>
+      <div class="acard-type">Dinámico · Abierto</div>
+      <div class="acard-desc">Las rutas cambian con el tráfico en tiempo real. Google Maps recalcula continuamente según condiciones del entorno.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">📈</div>
+      <div class="acard-name">Bolsa de Valores</div>
+      <div class="acard-type">Probabilístico · Complejo</div>
+      <div class="acard-desc">Precios fluctúan con incertidumbre y comportamiento gregario. Impredecible a largo plazo: comportamiento emergente.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🌐</div>
+      <div class="acard-name">Redes Sociales</div>
+      <div class="acard-type">Complejo · Adaptativo</div>
+      <div class="acard-desc">Miles de millones de usuarios interactuando. Comportamiento emergente: viralidad, tendencias, memes imposibles de predecir.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🦾</div>
+      <div class="acard-name">Robots Industriales</div>
+      <div class="acard-type">Artificial · Dinámico</div>
+      <div class="acard-desc">Creados por humanos, se mueven y adaptan constantemente. Brazos robóticos, drones autónomos, robots de servicio.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🏙️</div>
+      <div class="acard-name">Ciudades Inteligentes</div>
+      <div class="acard-type">Complejo · Adaptativo</div>
+      <div class="acard-desc">Semáforos que se ajustan al tráfico, redes de energía inteligentes. Auto-organización sin control central.</div>
+    </div>
+    <div class="acard">
+      <div class="acard-icon">🧬</div>
+      <div class="acard-name">Sistema Inmunológico</div>
+      <div class="acard-type">Adaptativo Complejo</div>
+      <div class="acard-desc">Se adapta a patógenos, auto-organiza defensas, crea anticuerpos específicos. Es uno de los mejores ejemplos de sistema adaptativo complejo.</div>
+    </div>
+  </div>
+
+  <div class="hbox" style="margin-top:24px;">
+    <div class="hbox-title">🦋 Comportamiento emergente en sistemas complejos</div>
+    <ul>
+      <li><strong>Efecto mariposa:</strong> un pequeño cambio puede tener grandes consecuencias (un tweet puede volverse viral)</li>
+      <li><strong>Autoorganización:</strong> el ejército de hormigas se comporta con inteligencia colectiva sin un líder central</li>
+      <li><strong>No linealidad:</strong> el tráfico vehicular puede formar atascos sin una causa aparente</li>
+      <li><strong>Sensibilidad inicial:</strong> el clima es difícil de predecir a largo plazo por su sensibilidad a condiciones iniciales</li>
+    </ul>
+  </div>
+  <div class="ref-note">Fuentes: Platecma (2026). platecma.com/2898 · Leonel Zapien (2025). leonelzapien.com · UNIR México (2026). mexico.unir.net · Digital CSIC. digital.csic.es/handle/10261/48078</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 8: EJERCICIOS CON RETROALIMENTACIÓN ══ -->
+<div class="slide" id="s8">
+<div class="slide-inner">
+  <div class="badge">Practica antes del quiz</div>
+  <h2 class="sec">Ejercicios <span class="t">con Retroalimentación</span></h2>
+  <p class="lead">Lee cada caso real y elige el tipo de sistema que mejor lo describe. Obtendrás retroalimentación inmediata con la justificación académica. No hay penalización — ¡practica sin miedo!</p>
+
+  <div id="ex-container"></div>
+
+  <div style="margin-top:28px;text-align:center;">
+    <button class="gbtn gbtn-rst" onclick="resetEj()">↺ Reiniciar ejercicios</button>
+  </div>
+  <div class="ref-note" style="margin-top:20px;">Fuentes: Studocu (2024) · Concepto.de (2026) · Bertalanffy (1974) · Platecma (2026) · UNIR México (2026)</div>
+</div>
+</div>
+
+<!-- ══ SLIDE 9: JUEGO 1 DRAG ══ -->
+<div class="slide" id="s9">
+<div class="slide-inner">
+  <div class="badge">Actividad interactiva 1 — Juego</div>
+  <h2 class="sec">Clasifica los <span class="t">Sistemas</span></h2>
+  <p class="lead">Arrastra cada ejemplo hacia la categoría de sistema a la que pertenece según su comportamiento. ¡Cuando termines, presiona Verificar!</p>
+
+  <div style="background:rgba(14,155,138,.07);border:1px solid rgba(14,155,138,.18);border-radius:var(--rs);padding:14px 18px;margin-bottom:20px;font-size:.87rem;color:rgba(255,255,255,.7);">
+    💡 <strong style="color:var(--teal-light);">Instrucciones:</strong> Arrastra los ejemplos de la zona superior a la categoría correcta. Un mismo sistema puede tener múltiples clasificaciones en la realidad, pero elige la más evidente.
+  </div>
+
+  <div class="drag-bank" id="drag-bank">
+    <div class="ditem" draggable="true" data-type="0" data-id="d1">☁️ El clima</div>
+    <div class="ditem" draggable="true" data-type="1" data-id="d2">🌉 Un puente</div>
+    <div class="ditem" draggable="true" data-type="2" data-id="d3">🤖 IA / Machine Learning</div>
+    <div class="ditem" draggable="true" data-type="3" data-id="d4">🏢 Una empresa</div>
+    <div class="ditem" draggable="true" data-type="0" data-id="d5">📈 Mercado bursátil</div>
+    <div class="ditem" draggable="true" data-type="1" data-id="d6">🗿 Una escultura</div>
+    <div class="ditem" draggable="true" data-type="2" data-id="d7">🦠 Sistema inmune</div>
+    <div class="ditem" draggable="true" data-type="3" data-id="d8">🌳 Un ecosistema</div>
+  </div>
+
+  <div class="drop-grid">
+    <div class="dzone dz0" data-accepts="0">
+      <div class="dzone-title">⚡ Dinámico</div>
+      <div class="dropped-list" id="zone-0"></div>
+    </div>
+    <div class="dzone dz1" data-accepts="1">
+      <div class="dzone-title">🗿 Estático</div>
+      <div class="dropped-list" id="zone-1"></div>
+    </div>
+    <div class="dzone dz2" data-accepts="2">
+      <div class="dzone-title">🔄 Adaptativo</div>
+      <div class="dropped-list" id="zone-2"></div>
+    </div>
+    <div class="dzone dz3" data-accepts="3">
+      <div class="dzone-title">🌐 Abierto</div>
+      <div class="dropped-list" id="zone-3"></div>
+    </div>
+  </div>
+
+  <div>
+    <button class="gbtn gbtn-go" onclick="checkDrag()">✓ Verificar</button>
+    <button class="gbtn gbtn-rst" onclick="resetDrag()">↺ Reiniciar</button>
+  </div>
+  <div class="gresult" id="drag-res"></div>
+</div>
+</div>
+
+<!-- ══ SLIDE 9: JUEGO 2 MEMORY ══ -->
+<div class="slide" id="s10">
+<div class="slide-inner">
+  <div class="badge">Actividad interactiva 2 — Memoria</div>
+  <h2 class="sec">Memoria de <span class="t">Sistemas</span></h2>
+  <p class="lead">Encuentra las parejas: cada tipo de sistema tiene su ejemplo correspondiente. Voltea las cartas y une el concepto con su ejemplo real.</p>
+
+  <div class="mem-bar">
+    <div class="mem-stat"><div class="mem-lbl">Movimientos</div><div class="mem-val" id="mmoves">0</div></div>
+    <div class="mem-stat"><div class="mem-lbl">Parejas</div><div class="mem-val" id="mpairs">0/8</div></div>
+    <div class="mem-stat"><div class="mem-lbl">Estado</div><div class="mem-val" id="mstatus">🎮 Jugando</div></div>
+  </div>
+
+  <div class="mgrid" id="mgrid"></div>
+  <div style="text-align:center;">
+    <button class="gbtn gbtn-rst" onclick="initMem()">↺ Nueva partida</button>
+  </div>
+</div>
+</div>
+
+<!-- ══ SLIDE 10: VIDEOS ══ -->
+<div class="slide" id="s11">
+<div class="slide-inner">
+  <div class="badge">Recursos audiovisuales</div>
+  <h2 class="sec">Videos <span class="t">Educativos</span></h2>
+  <p class="lead">Complementa tu aprendizaje con estos videos seleccionados sobre Teoría General de Sistemas. Mira, pausa y repasa las veces que necesites.</p>
+
+  <div class="vgrid">
+    <div class="vcard">
+      <div class="vembed"><iframe src="https://www.youtube.com/embed/QbBy20GPlqc" title="TGS Bertalanffy" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vinfo">
+        <div class="vtitle">Teoría General de Sistemas de Bertalanffy (2:50 min)</div>
+        <div class="vdesc">Fundamentos de la TGS: qué es un sistema, el principio "el todo es más que la suma de sus partes" y los tipos básicos. Video recomendado en la investigación del estudiante.</div>
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vembed"><iframe src="https://www.youtube.com/embed/5J4AcCsz-o8" title="Conceptos básicos TGS" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vinfo">
+        <div class="vtitle">TGS: Conceptos Básicos — Richard Marín Oficial (2020)</div>
+        <div class="vdesc">Entradas, salidas, transformadores, retroalimentación, límite y entorno de un sistema. Explicación visual clara con ejemplos prácticos. Fuente: Raffino (2026) via Richard Marin Oficial.</div>
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vembed"><iframe src="https://www.youtube.com/embed/CHEkTPbo8vg" title="Emergencia sistemas complejos" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vinfo">
+        <div class="vtitle">Complexipedia: Emergencia en Sistemas Complejos (5:15 min)</div>
+        <div class="vdesc">Comportamiento emergente, autoorganización y no linealidad en sistemas complejos adaptativos. Relacionado directamente con IA, ecosistemas y redes sociales.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ SLIDE 11: QUIZ ══ -->
+<div class="slide" id="s12">
+<div class="slide-inner">
+  <div class="badge">Evaluación final</div>
+  <h2 class="sec">Quiz de <span class="t">Evaluación</span></h2>
+  <p class="lead">10 preguntas para medir tu comprensión. Cada respuesta incluye retroalimentación con la justificación correcta. ¡Buena suerte!</p>
+
+  <div class="quiz-wrap">
+    <div id="qbody">
+      <div class="qprog-row">
+        <div class="qpbar"><div class="qpfill" id="qpf" style="width:10%"></div></div>
+        <span class="qctr" id="qctr">1/10</span>
+      </div>
+      <div class="qquestion" id="qq"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qfb" id="qfb"></div>
+      <div class="qnav">
+        <div class="qpts">Puntos: <span id="qsc">0</span></div>
+        <button class="gbtn gbtn-go" id="qnxt" onclick="nextQ()" style="display:none">Siguiente →</button>
+      </div>
+    </div>
+    <div class="qfinal" id="qfinal">
+      <div class="qfscore" id="qfs"></div>
+      <div class="qflbl" id="qfl"></div>
+      <div class="qfmsg" id="qfm"></div>
+      <button class="gbtn gbtn-go" onclick="restartQ()">↺ Intentar de nuevo</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ SLIDE 12: CRÉDITOS ══ -->
+<div class="slide" id="s13">
+<div class="slide-inner">
+  <div class="badge">Ficha técnica y bibliografía</div>
+  <h2 class="sec">Créditos y <span class="t">Referencias</span></h2>
+  <p class="lead">Información del Objeto Virtual de Aprendizaje y fuentes bibliográficas utilizadas en la construcción del contenido.</p>
+
+  <div class="cred-grid">
+    <div>
+      <div class="ccard">
+        <div class="ccard-title">Ficha Técnica del OVA</div>
+        <div class="citem"><strong>Título</strong>Tipos de Sistemas en la Teoría General de Sistemas</div>
+        <div class="citem"><strong>Autor</strong>Briceño Díaz, José Antonio</div>
+        <div class="citem"><strong>Proyecto N°</strong>4 — Tema asignado</div>
+        <div class="citem"><strong>Asignatura</strong>Teoría General de Sistemas (TGS)</div>
+        <div class="citem"><strong>Institución</strong>Universidad Simón Bolívar — Facultad de Ingenierías — Cúcuta</div>
+        <div class="citem"><strong>Año</strong>2026</div>
+        <div class="citem"><strong>Herramientas</strong>HTML5, CSS3, JavaScript Vanilla, Claude AI (asistencia en desarrollo), Google Fonts: Syne + DM Sans</div>
+        <div class="citem"><strong>Licencia</strong>MIT License — Libre uso con atribución al autor</div>
+        <div class="citem"><strong>Publicación</strong>GitHub Pages</div>
+      </div>
+    </div>
+    <div>
+      <div class="ccard">
+        <div class="ccard-title">Referencias Bibliográficas (APA)</div>
+        <div class="ref">Bertalanffy, L. von. (1974). <em>Robots, hombres y mentes</em>. Guadarrama, Madrid. p. 96.</div>
+        <div class="ref">Bertalanffy, L. von. (1976). <em>Teoría general de los sistemas</em>. Fondo de Cultura Económica.</div>
+        <div class="ref">Raffino, Equipo editorial Etecé. (11 de enero de 2026). Teoría de sistemas. <em>Enciclopedia Concepto</em>. concepto.de/teoria-de-sistemas/</div>
+        <div class="ref">Concepto. (2026, 15 de enero). Diferencia entre sistema abierto, cerrado y aislado. concepto.de/diferencia-entre-sistema-abierto-cerrado-y-aislado/</div>
+        <div class="ref">Hernandez. (2024). Cuadro comparativo de sistema dinámico vs estático. <em>Studocu</em>. studocu.com/co — Politécnico Grancolombiano.</div>
+        <div class="ref">Studocu. (2024). Tipos de Sistemas: Abiertos, Cerrados y Semiabiertos. studocu.com/es-ar — UNLP.</div>
+        <div class="ref">Studocu. (2025). Clasificación de los sistemas naturales, artificiales y sociales. studocu.com/pe — UNI.</div>
+        <div class="ref">Ejemplos.co. (2025). 30 ejemplos de sistema abierto, cerrado y aislado. ejemplos.co</div>
+        <div class="ref">Leonel Zapien. (2025). Una organización como Sistema Adaptativo Complejo. leonelzapien.com/blog/organizacion-sistema-adaptativo-complejo</div>
+        <div class="ref">UNIR México. (2026). Los sistemas dinámicos en Matemáticas. mexico.unir.net/noticias/ingenieria/sistemas-dinamicos-matematicas/</div>
+        <div class="ref">Platecma. (2026). Sistemas adaptativos e Inteligencia Artificial. platecma.com/2898/</div>
+        <div class="ref">Wikipedia. (2004, 17 de agosto). Sistema dinámico. es.wikipedia.org/wiki/Sistema_dinámico</div>
+        <div class="ref">SENA — ADSI. <em>Fase 1 Identificación: TGS</em>. CC BY-NC-SA.</div>
+        <div class="ref">Universidad Simón Bolívar. (2026). <em>Presentación: Clasificación de los Sistemas — TGS</em>. Cúcuta: UniSimón.</div>
+        <div class="ref">Richard Marin Oficial. (2020, 20 mayo). <em>Teoría General de Sistemas: Conceptos Básicos</em> [Video]. YouTube. youtube.com/watch?v=5J4AcCsz-o8</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px;padding:20px;background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r);">
+    <p style="font-size:.78rem;color:rgba(255,255,255,.3);">OVA · Tipos de Sistemas · Teoría General de Sistemas · Universidad Simón Bolívar · José Antonio Briceño Díaz · 2026</p>
+  </div>
+</div>
+</div>
+
+</div><!-- end ova-wrapper -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← Anterior</button>
+  <div class="slide-label" id="slide-label">Inicio</div>
+  <button class="nav-btn btn-next" id="btn-next" onclick="go(1)">Siguiente →</button>
+</div>
+
+<script>
+// ── CONFIG ──
+const SLIDES = [
+  {id:'s1', label:'Portada', nav:'1'},
+  {id:'s2', label:'¿Qué es un sistema?', nav:'2'},
+  {id:'s3', label:'Dinámicos · Estáticos · Adaptativos', nav:'3'},
+  {id:'s4', label:'Abiertos · Cerrados · Aislados', nav:'4'},
+  {id:'s5', label:'Naturales · Artificiales · Sociales', nav:'5'},
+  {id:'s6', label:'Simples · Complejos · Det./Prob.', nav:'6'},
+  {id:'s7', label:'Aplicaciones Modernas', nav:'7'},
+  {id:'s8', label:'Ejercicios — Practica', nav:'8'},
+  {id:'s9', label:'Juego 1 — Clasifica', nav:'9'},
+  {id:'s10', label:'Juego 2 — Memoria', nav:'10'},
+  {id:'s11', label:'Videos', nav:'11'},
+  {id:'s12', label:'Quiz', nav:'12'},
+  {id:'s13', label:'Créditos', nav:'13'},
+];
+let cur = 0;
+
+function buildNav(){
+  const stepsEl = document.getElementById('nav-steps');
+  SLIDES.forEach((s,i)=>{
+    const d = document.createElement('div');
+    d.className='nav-step'+(i===0?' active':'');
+    d.textContent=s.nav;
+    d.title=s.label;
+    d.onclick=()=>goTo(i);
+    stepsEl.appendChild(d);
+  });
+}
+
+function goTo(idx){
+  document.getElementById(SLIDES[cur].id).classList.remove('active');
+  document.querySelectorAll('.nav-step')[cur].classList.remove('active');
+  cur=idx;
+  document.getElementById(SLIDES[cur].id).classList.add('active');
+  document.querySelectorAll('.nav-step')[cur].classList.add('active');
+  document.getElementById('btn-prev').disabled = cur===0;
+  document.getElementById('btn-next').disabled = cur===SLIDES.length-1;
+  document.getElementById('btn-next').textContent = cur===SLIDES.length-1 ? '✓ Fin' : 'Siguiente →';
+  document.getElementById('slide-label').textContent = `${cur+1}/${SLIDES.length} — ${SLIDES[cur].label}`;
+  document.getElementById('nav-info').textContent = `${cur+1} / ${SLIDES.length}`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function go(d){goTo(cur+d);}
+buildNav();
+goTo(0);
+
+// ── EJERCICIOS CON RETROALIMENTACIÓN ──
+const EJERCICIOS = [
+  {
+    caso: '🌡️ <strong>Caso 1:</strong> El sistema de control de temperatura de un invernadero inteligente ajusta automáticamente la calefacción y ventilación según los datos de sensores externos (clima, humedad, luz solar) para mantener las plantas en condiciones óptimas.',
+    opciones: ['Sistema Estático', 'Sistema Adaptativo', 'Sistema Cerrado', 'Sistema Determinístico'],
+    correcta: 1,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema adaptativo</strong>: ajusta su comportamiento en respuesta a condiciones cambiantes del entorno usando retroalimentación constante. (Platecma, 2026 · cs.us.es)',
+    feedback_mal: '❌ No es esa la clasificación correcta. Este sistema <em>aprende y se ajusta</em> a condiciones cambiantes sin intervención humana directa → eso es un <strong>Sistema Adaptativo</strong>. Los sistemas adaptativos usan retroalimentación para mantener funcionalidad. (Platecma, 2026)'
+  },
+  {
+    caso: '🏛️ <strong>Caso 2:</strong> Las leyes de Newton describen el movimiento de un objeto: dada una fuerza F y una masa m, la aceleración siempre será exactamente a = F/m. Siempre que se apliquen las mismas condiciones, el resultado es idéntico.',
+    opciones: ['Sistema Probabilístico', 'Sistema Dinámico', 'Sistema Determinístico', 'Sistema Adaptativo'],
+    correcta: 2,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema determinístico</strong>: conociendo las entradas (F, m), la salida (a) es exacta y predecible. No hay azar. Fórmula: Salida = f(Entrada). (Scribd/Wikipedia, 2025)',
+    feedback_mal: '❌ Incorrecto. Cuando las mismas entradas producen <em>siempre</em> la misma salida sin incertidumbre → es un <strong>Sistema Determinístico</strong>. A diferencia de los probabilísticos, aquí no hay azar involucrado. (Scribd/Wikipedia, 2025)'
+  },
+  {
+    caso: '🌊 <strong>Caso 3:</strong> Un océano intercambia calor con la atmósfera, recibe agua de ríos, evaporación de sus aguas forma nubes, y alberga ecosistemas que dependen de nutrientes del continente. Sus variables (temperatura, salinidad, corrientes) cambian constantemente.',
+    opciones: ['Sistema Estático y Cerrado', 'Sistema Aislado', 'Sistema Abierto y Dinámico', 'Sistema Simple y Discreto'],
+    correcta: 2,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema abierto</strong> (intercambia materia y energía con el entorno) y <strong>dinámico</strong> (sus variables cambian con el tiempo). Un mismo sistema puede pertenecer a múltiples categorías. (Concepto.de, 2026 · Studocu, 2024)',
+    feedback_mal: '❌ Incorrecto. Un océano intercambia materia y energía libremente con su entorno → <strong>Abierto</strong>. Además sus variables evolucionan con el tiempo → <strong>Dinámico</strong>. Un sistema puede pertenecer a varias categorías simultáneamente. (Concepto.de, 2026)'
+  },
+  {
+    caso: '🎰 <strong>Caso 4:</strong> Un casino modela sus ganancias usando distribuciones estadísticas: sabe que en promedio gana cierto porcentaje, pero el resultado de cada apuesta individual varía. No puede predecir con certeza el resultado de una jugada específica.',
+    opciones: ['Sistema Determinístico', 'Sistema Probabilístico', 'Sistema Estático', 'Sistema Cerrado'],
+    correcta: 1,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema probabilístico</strong>: al menos una variable (el resultado de cada apuesta) es aleatoria. Se puede modelar estadísticamente pero no predecir con certeza. Fórmula: Salida = f(Entrada) + azar. (Scribd/Wikipedia, 2025)',
+    feedback_mal: '❌ Incorrecto. Cuando los resultados incluyen incertidumbre y al menos una variable es aleatoria → <strong>Sistema Probabilístico</strong>. Se pueden calcular probabilidades, pero no resultados exactos. (Scribd/Wikipedia, 2025)'
+  },
+  {
+    caso: '🦋 <strong>Caso 5:</strong> Una colonia de hormigas no tiene un líder central que les indique qué hacer, pero como conjunto logran construir estructuras complejas, organizar rutas de alimento y defender el nido. El comportamiento del grupo es mucho más sofisticado que el de cada hormiga individual.',
+    opciones: ['Sistema Simple y Estático', 'Sistema Cerrado y Determinístico', 'Sistema Complejo con comportamiento emergente', 'Sistema Aislado y Continuo'],
+    correcta: 2,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema complejo</strong>: muchos elementos interactuando con <em>comportamiento emergente</em> — el todo es más que la suma de sus partes (Bertalanffy, 1974). La autoorganización sin autoridad central es una característica clave. (Leonel Zapien, 2025 · digital.csic.es)',
+    feedback_mal: '❌ Incorrecto. Cuando muchos elementos interactúan y surge un comportamiento que ninguno tendría individualmente → <strong>Sistema Complejo con comportamiento emergente</strong>. Es el principio de Bertalanffy: "el todo es más que la suma de sus partes". (Bertalanffy, 1974)'
+  },
+  {
+    caso: '💊 <strong>Caso 6:</strong> Un termo de alta calidad mantiene el café caliente durante horas. No entra ni sale calor de forma significativa, y tampoco hay intercambio de materia con el exterior. Es un caso ideal de aislamiento total.',
+    opciones: ['Sistema Abierto', 'Sistema Dinámico', 'Sistema Aislado', 'Sistema Adaptativo'],
+    correcta: 2,
+    feedback_ok: '✅ ¡Correcto! Es un <strong>sistema aislado</strong> (de forma ideal): no intercambia ni materia ni energía con el entorno. En termodinámica: ΔE = 0. En la práctica es un sistema teórico; el universo sería el único sistema aislado real. (diferenciador.com · Concepto.de, 2026)',
+    feedback_mal: '❌ Incorrecto. Cuando no hay intercambio ni de materia ni de energía con el entorno → <strong>Sistema Aislado</strong>. Es diferente al cerrado (que sí intercambia energía). En la práctica es casi ideal; el universo es el único ejemplo real perfecto. (diferenciador.com)'
+  },
+];
+
+let ejState = EJERCICIOS.map(() => ({answered: false, correct: false}));
+
+function renderEjercicios(){
+  const cont = document.getElementById('ex-container');
+  cont.innerHTML = '';
+  EJERCICIOS.forEach((ej, i) => {
+    const state = ejState[i];
+    const div = document.createElement('div');
+    div.style.cssText = 'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 24px;margin-bottom:20px;transition:border-color .3s;';
+    if(state.answered) div.style.borderColor = state.correct ? 'rgba(14,155,138,.5)' : 'rgba(220,60,60,.4)';
+
+    const progLabel = state.answered
+      ? (state.correct ? '<span style="color:var(--teal-light);font-size:.8rem;font-weight:600;">✅ Correcto</span>' : '<span style="color:#ff8a8a;font-size:.8rem;font-weight:600;">❌ Incorrecto</span>')
+      : `<span style="color:rgba(255,255,255,.35);font-size:.8rem;">Ejercicio ${i+1} de ${EJERCICIOS.length}</span>`;
+
+    const optsHTML = ej.opciones.map((op, j) => {
+      let btnStyle = 'display:block;width:100%;text-align:left;padding:11px 16px;margin:7px 0;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);font-family:\'DM Sans\',sans-serif;font-size:.88rem;cursor:pointer;transition:all .2s;';
+      if(state.answered){
+        if(j === ej.correcta) btnStyle += 'background:rgba(14,155,138,.2);border-color:var(--teal);color:var(--teal-light);font-weight:600;';
+        else if(state.selectedIdx === j && j !== ej.correcta) btnStyle += 'background:rgba(220,60,60,.18);border-color:#e05;color:#ff8a8a;';
+        btnStyle += 'cursor:default;';
+      }
+      const disabledAttr = state.answered ? 'disabled' : '';
+      return `<button style="${btnStyle}" ${disabledAttr} onclick="answerEj(${i},${j})">${op}</button>`;
+    }).join('');
+
+    const fbHTML = state.answered
+      ? `<div style="margin-top:14px;padding:14px 16px;border-radius:8px;background:${state.correct?'rgba(14,155,138,.1)':'rgba(220,60,60,.1)'};border:1px solid ${state.correct?'rgba(14,155,138,.3)':'rgba(220,60,60,.3)'};font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.85);">${state.correct ? ej.feedback_ok : ej.feedback_mal}</div>`
+      : '';
+
+    div.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+        <p style="font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.88);flex:1;">${ej.caso}</p>
+        <div style="margin-left:12px;flex-shrink:0;">${progLabel}</div>
+      </div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">¿Qué tipo de sistema es?</div>
+      ${optsHTML}
+      ${fbHTML}
+    `;
+    cont.appendChild(div);
+  });
+
+  // Summary bar
+  const done = ejState.filter(e=>e.answered).length;
+  const correct = ejState.filter(e=>e.correct).length;
+  if(done > 0){
+    const summ = document.createElement('div');
+    summ.style.cssText = 'text-align:center;padding:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-top:8px;';
+    summ.innerHTML = `<span style="font-size:.9rem;color:rgba(255,255,255,.6);">Progreso: </span><strong style="color:var(--teal-light);">${done}/${EJERCICIOS.length}</strong> respondidos · <strong style="color:${correct===done?'var(--teal-light)':'var(--orange-light)'};">${correct} correctas</strong>${done===EJERCICIOS.length?` · <span style="color:var(--gold);">¡Completado! Ahora intenta los juegos y el quiz 🚀</span>`:''}`;
+    cont.appendChild(summ);
+  }
+}
+
+function answerEj(ejIdx, optIdx){
+  if(ejState[ejIdx].answered) return;
+  ejState[ejIdx].answered = true;
+  ejState[ejIdx].selectedIdx = optIdx;
+  ejState[ejIdx].correct = optIdx === EJERCICIOS[ejIdx].correcta;
+  renderEjercicios();
+  // Scroll to the feedback of this exercise
+  const cards = document.querySelectorAll('#ex-container > div');
+  if(cards[ejIdx]) cards[ejIdx].scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function resetEj(){
+  ejState = EJERCICIOS.map(() => ({answered: false, correct: false}));
+  renderEjercicios();
+}
+
+renderEjercicios();
+
+// ── DRAG AND DROP ──
+let dragItem=null, dragState={};
+document.querySelectorAll('.ditem').forEach(el=>{
+  el.addEventListener('dragstart',e=>{dragItem=el;el.classList.add('dragging');e.dataTransfer.setData('text/plain',el.dataset.id);});
+  el.addEventListener('dragend',()=>{dragItem=null;document.querySelectorAll('.ditem').forEach(d=>d.classList.remove('dragging'));});
+});
+document.querySelectorAll('.dzone').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();zone.classList.remove('over');
+    if(!dragItem)return;
+    const id=dragItem.dataset.id, type=dragItem.dataset.type, acc=zone.dataset.accepts;
+    const label=dragItem.textContent;
+    document.querySelectorAll(`.dplaced[data-id="${id}"]`).forEach(d=>d.remove());
+    dragItem.style.display='none';
+    dragState[id]={type,placed:acc};
+    const p=document.createElement('div');
+    p.className='dplaced';p.dataset.id=id;
+    p.innerHTML=`${label}<span class="rmv" onclick="removeDrop('${id}','${label}')">✕</span>`;
+    zone.querySelector('.dropped-list').appendChild(p);
+  });
+});
+function removeDrop(id,label){
+  document.querySelectorAll(`.dplaced[data-id="${id}"]`).forEach(d=>d.remove());
+  const src=document.querySelector(`.ditem[data-id="${id}"]`);
+  if(src)src.style.display='';
+  delete dragState[id];
+}
+// Feedback labels for each draggable item
+const DRAG_FEEDBACK={
+  d1:{correct:'⚡ Dinámico',wrong:'❌ El clima cambia constantemente (temperatura, presión, vientos) → es <strong>Dinámico</strong>.'},
+  d2:{correct:'🗿 Estático',wrong:'❌ Un puente no cambia con el tiempo bajo condiciones normales → es <strong>Estático</strong>.'},
+  d3:{correct:'🔄 Adaptativo',wrong:'❌ La IA aprende y ajusta su comportamiento con cada interacción → es <strong>Adaptativo</strong>.'},
+  d4:{correct:'🌐 Abierto',wrong:'❌ Una empresa intercambia clientes, recursos, información con su entorno → es <strong>Abierto</strong>.'},
+  d5:{correct:'⚡ Dinámico',wrong:'❌ El mercado bursátil cambia segundo a segundo → es <strong>Dinámico</strong>.'},
+  d6:{correct:'🗿 Estático',wrong:'❌ Una escultura permanece en un estado constante → es <strong>Estático</strong>.'},
+  d7:{correct:'🔄 Adaptativo',wrong:'❌ El sistema inmune aprende a combatir nuevos patógenos → es <strong>Adaptativo</strong>.'},
+  d8:{correct:'🌐 Abierto',wrong:'❌ Un ecosistema intercambia energía, materia y organismos con su entorno → es <strong>Abierto</strong>.'},
+};
+function checkDrag(){
+  let ok=0,tot=Object.keys(dragState).length;
+  if(tot===0){const r=document.getElementById('drag-res');r.className='gresult show fail';r.textContent='⚠️ Arrastra al menos un ejemplo antes de verificar.';return;}
+  // Mark each placed item visually
+  for(const id in dragState){
+    const correct=dragState[id].type===dragState[id].placed;
+    if(correct)ok++;
+    document.querySelectorAll(`.dplaced[data-id="${id}"]`).forEach(el=>{
+      el.style.background=correct?'rgba(14,155,138,.25)':'rgba(220,60,60,.25)';
+      el.style.borderColor=correct?'var(--teal)':'#e05';
+      el.style.borderWidth='1px';
+      el.style.borderStyle='solid';
+      el.style.borderRadius='6px';
+      el.style.padding='4px 8px';
+      // Add inline hint for wrong ones
+      if(!correct){
+        const hint=document.createElement('div');
+        hint.style.cssText='font-size:.75rem;color:#ff8a8a;margin-top:4px;line-height:1.4;';
+        hint.innerHTML=DRAG_FEEDBACK[id].wrong;
+        // avoid duplicate hints
+        if(!el.querySelector('.drag-hint')){hint.className='drag-hint';el.appendChild(hint);}
+      }
+    });
+  }
+  const r=document.getElementById('drag-res');r.classList.add('show');
+  if(ok===tot&&tot===8){
+    r.className='gresult show ok';
+    r.innerHTML='🎉 ¡Perfecto! Clasificaste todos los sistemas correctamente. ¡Excelente dominio del tema!';
+  } else {
+    const wrong=tot-ok;
+    r.className='gresult show fail';
+    r.innerHTML=`<strong>${ok} de ${tot} correctas.</strong> Los elementos marcados en rojo tienen la categoría correcta indicada debajo. Corrígelos y vuelve a verificar, o usa ↺ Reiniciar para empezar de nuevo.`;
+  }
+}
+}
+function resetDrag(){
+  document.querySelectorAll('.ditem').forEach(i=>i.style.display='');
+  document.querySelectorAll('.dropped-list').forEach(c=>c.innerHTML='');
+  for(const k in dragState)delete dragState[k];
+  const r=document.getElementById('drag-res');r.className='gresult';r.classList.remove('show');
+}
+
+// ── MEMORY ──
+const memData=[
+  {id:'m1',text:'⚡ Dinámico',match:'m2'},{id:'m2',text:'El clima terrestre',match:'m1'},
+  {id:'m3',text:'🗿 Estático',match:'m4'},{id:'m4',text:'Un puente de concreto',match:'m3'},
+  {id:'m5',text:'🔄 Adaptativo',match:'m6'},{id:'m6',text:'Machine Learning / IA',match:'m5'},
+  {id:'m7',text:'🌐 Abierto',match:'m8'},{id:'m8',text:'Una empresa en el mercado',match:'m7'},
+  {id:'m9',text:'🔒 Cerrado',match:'m10'},{id:'m10',text:'Sistema termodinámico aislado',match:'m9'},
+  {id:'m11',text:'🧠 Complejo',match:'m12'},{id:'m12',text:'El cerebro humano',match:'m11'},
+  {id:'m13',text:'💡 Discreto',match:'m14'},{id:'m14',text:'Un semáforo (rojo/verde)',match:'m13'},
+  {id:'m15',text:'〰️ Continuo',match:'m16'},{id:'m16',text:'Temperatura corporal',match:'m15'},
+];
+let mFlipped=[],mMatched=[],mMoves=0;
+function shuffle(a){return[...a].sort(()=>Math.random()-.5);}
+function initMem(){
+  mFlipped=[];mMatched=[];mMoves=0;
+  document.getElementById('mmoves').textContent='0';
+  document.getElementById('mpairs').textContent='0/8';
+  document.getElementById('mstatus').textContent='🎮 Jugando';
+  const g=document.getElementById('mgrid');g.innerHTML='';
+  shuffle(memData).forEach(card=>{
+    const el=document.createElement('div');
+    el.className='mcard';el.dataset.id=card.id;el.dataset.match=card.match;
+    el.innerHTML=`<div class="minner"><div class="mfront">🃏</div><div class="mback"><span class="me">${card.text.includes('⚡')||card.text.includes('🗿')||card.text.includes('🔄')||card.text.includes('🌐')||card.text.includes('🔒')||card.text.includes('🧠')||card.text.includes('💡')||card.text.includes('〰️')?'📌':'🔍'}</span>${card.text}</div></div>`;
+    el.addEventListener('click',()=>flipMem(el));
+    g.appendChild(el);
+  });
+}
+function flipMem(card){
+  if(mFlipped.length===2)return;
+  if(card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  card.classList.add('flipped');mFlipped.push(card);
+  if(mFlipped.length===2){
+    mMoves++;document.getElementById('mmoves').textContent=mMoves;
+    const[a,b]=mFlipped;
+    if(a.dataset.match===b.dataset.id){
+      setTimeout(()=>{
+        a.classList.add('matched');b.classList.add('matched');
+        mMatched.push(a.dataset.id,b.dataset.id);mFlipped=[];
+        const p=mMatched.length/2;
+        document.getElementById('mpairs').textContent=`${p}/8`;
+        if(p===8)document.getElementById('mstatus').textContent='🏆 ¡Completado!';
+      },400);
+    }else{setTimeout(()=>{a.classList.remove('flipped');b.classList.remove('flipped');mFlipped=[];},900);}
+  }
+}
+initMem();
+
+// ── QUIZ ──
+const QS=[
+  {q:'¿Cuál de los siguientes es un ejemplo de sistema DINÁMICO?',o:['Una estatua de mármol','El tráfico de una ciudad','Un puente colgante','Un vaso de vidrio'],a:1,f:'El tráfico cambia constantemente en el tiempo — sus variables evolucionan. Los demás son sistemas estáticos.'},
+  {q:'Un sistema adaptativo se caracteriza principalmente por:',o:['No cambiar nunca su estructura','Estar completamente aislado del entorno','Modificar su comportamiento en respuesta al entorno','Tener muy pocos elementos'],a:2,f:'Los sistemas adaptativos usan retroalimentación para ajustar su comportamiento. El sistema inmunológico y la IA son ejemplos clave. (cs.us.es)'},
+  {q:'¿Qué diferencia a un sistema ABIERTO de un sistema CERRADO?',o:['El número de elementos que posee','El intercambio de materia, energía o información con el entorno','La velocidad con que cambia','El tipo de variables que lo definen'],a:1,f:'La diferencia clave es el intercambio con el entorno. (Concepto, 2026: concepto.de/diferencia-entre-sistema-abierto-cerrado-y-aislado/)'},
+  {q:'¿Qué es un sistema AISLADO según la termodinámica?',o:['Uno que solo intercambia energía','Uno que no intercambia ni materia ni energía con el entorno','Un sistema cerrado con muchos elementos','Un sistema social sin comunicación externa'],a:1,f:'El sistema aislado no intercambia ni materia ni energía. Es un sistema teórico/ideal. El único ejemplo real sería el universo. (diferenciador.com)'},
+  {q:'El cerebro humano es un ejemplo de sistema:',o:['Simple y estático','Complejo y dinámico','Discreto y cerrado','Estático y continuo'],a:1,f:'Con millones de neuronas en constante interacción (complejo) y que cambia con el tiempo (dinámico). Tiene comportamiento emergente. (digital.csic.es)'},
+  {q:'La IA de Netflix que recomienda películas según tu historial es un sistema:',o:['Estático y cerrado','Adaptativo y probabilístico','Simple y discreto','Aislado y determinístico'],a:1,f:'Aprende y se ajusta automáticamente (adaptativo) y predice preferencias con probabilidad, no certeza (probabilístico). (Platecma, 2026)'},
+  {q:'¿Cuál es la diferencia entre un sistema determinístico y uno probabilístico?',o:['El determinístico es más complejo','El probabilístico no tiene variables de entrada','El determinístico predice la salida exacta; el probabilístico incluye azar','El determinístico siempre cambia con el tiempo'],a:2,f:'Determinístico: Salida = f(Entrada) — predecible. Probabilístico: Salida = f(Entrada) + azar — incluye incertidumbre. (Scribd/Wikipedia, 2025)'},
+  {q:'Una célula biológica con membrana semipermeable es un ejemplo de:',o:['Sistema aislado','Sistema cerrado','Sistema semiabierto','Sistema estático'],a:2,f:'La membrana semipermeable permite intercambio selectivo de energía e información, pero limita el de materia. Eso es exactamente un sistema semiabierto. (Studocu, 2024)'},
+  {q:'¿Por qué el comportamiento del mercado bursátil es difícil de predecir?',o:['Porque es un sistema estático','Porque es un sistema determinístico simple','Porque es un sistema complejo con comportamiento emergente y no lineal','Porque es un sistema cerrado'],a:2,f:'El mercado tiene comportamiento gregario, fluctuaciones impredecibles y efectos emergentes de millones de decisiones simultáneas. (digital.csic.es)'},
+  {q:'Según Bertalanffy, ¿cuál es el principio fundamental de los sistemas?',o:['"Las partes son más importantes que el todo"','"El todo es más que la suma de sus partes"','"Los sistemas nunca cambian"','"Solo existen sistemas cerrados en la naturaleza"'],a:1,f:'"El todo es más que la suma de sus partes" es el principio de sinergia y comportamiento emergente, base de toda la TGS. (Bertalanffy, 1974, p. 96)'},
+];
+let qi=0,qs=0,qans=false;
+function loadQ(){
+  qans=false;const q=QS[qi];
+  document.getElementById('qq').textContent=q.q;
+  document.getElementById('qctr').textContent=`${qi+1}/10`;
+  document.getElementById('qpf').style.width=`${((qi+1)/10)*100}%`;
+  document.getElementById('qsc').textContent=qs;
+  document.getElementById('qnxt').style.display='none';
+  const fb=document.getElementById('qfb');fb.classList.remove('show','ok','fail');
+  const opts=document.getElementById('qo');opts.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qletter">${l}</span>${q.o[i]}`;
+    b.onclick=()=>ansQ(i,b);opts.appendChild(b);
+  });
+  document.getElementById('qbody').style.display='block';
+  document.getElementById('qfinal').classList.remove('show');
+}
+function ansQ(idx,btn){
+  if(qans)return;qans=true;
+  const q=QS[qi];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  const fb=document.getElementById('qfb');
+  if(idx===q.a){btn.classList.add('correct');qs++;document.getElementById('qsc').textContent=qs;fb.className='qfb show ok';fb.textContent='✅ ¡Correcto! '+q.f;}
+  else{btn.classList.add('wrong');document.querySelectorAll('.qopt')[q.a].classList.add('correct');fb.className='qfb show fail';fb.textContent='❌ Incorrecto. '+q.f;}
+  document.getElementById('qnxt').style.display='inline-flex';
+}
+function nextQ(){qi++;qi>=QS.length?showFinal():loadQ();}
+function showFinal(){
+  document.getElementById('qbody').style.display='none';
+  const fin=document.getElementById('qfinal');fin.classList.add('show');
+  const pct=Math.round((qs/QS.length)*100);
+  const sc=document.getElementById('qfs');sc.textContent=`${qs}/${QS.length}`;
+  sc.className=pct>=80?'qfscore great':pct>=50?'qfscore ok':'qfscore bad';
+  const msgs=[[80,'🏆 ¡Excelente!','Tienes dominio sólido del tema. Estás muy bien preparado para la sustentación.'],[50,'👍 Buen avance','Entiendes los conceptos básicos. Repasa las secciones de teoría y vuelve a intentarlo.'],[0,'📚 Sigue practicando','No te desanimes. Regresa a la Teoría, lee con calma y vuelve a intentar el quiz.']];
+  const [,lbl,msg]=msgs.find(([t])=>pct>=t);
+  document.getElementById('qfl').textContent=lbl;document.getElementById('qfm').textContent=msg;
+}
+function restartQ(){qi=0;qs=0;loadQ();}
+loadQ();
+</script>
+</body>
+</html>
